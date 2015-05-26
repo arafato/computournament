@@ -1,0 +1,75 @@
+
+            html, body {
+                margin  : 0;
+                padding : 0;
+                height  : 100%;
+                width   : 100%;
+                text-align: center;
+                font-family: sans-serif;
+            }
+            
+            @media only screen and (max-width: 600px) {
+                html, body {
+                    height  : 117%;
+                }
+            }
+
+            #result {
+                height: 60%;
+                width: 100%;
+            }
+
+            #reload {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
+            #ddbStatus {
+                font-size: smaller;
+            }
+
+            .color {
+                font-weight: bold;
+            }
+
+            #colorBlueLabel {
+                color: blue;
+            }
+
+            #colorGreenLabel {
+                color: green;
+            }
+
+            #colorRedLabel {
+                color: red;
+            }
+
+            #colorBlueLabel, #colorGreenLabel, #colorRedLabel  {
+                padding: 10px;
+            }
+
+            #blueButton, #greenButton, #redButton {
+                color: white;
+                border: 0px;
+                -moz-border-radius: 15px;
+                -webkit-border-radius: 15px;
+                padding-left: 15px;
+                padding-right: 15px;
+                font-size: 20px;
+            }
+
+            #blueButton {
+                background-color: blue;
+            }
+
+            #greenButton {
+                background-color: green;
+            }
+
+            #redButton {
+                background-color: red;
+            }
+
+            .votedButton {
+                border: 5px solid black !important;
+            }
