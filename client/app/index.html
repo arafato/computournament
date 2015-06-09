@@ -33,7 +33,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Your rank: <span data-bind="text: rank"></span></a></li>
             <li><a href="#about">Level: <span data-bind="text: level"></span></a></li>
-	    <li><a href="#about">ID: <span data-bind="text: cognitoId"></span></a></li>
+	    <li><a href="#about">ID: <span data-bind="text: identityId"></span></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -41,30 +41,38 @@
     
     <div class="container">
       <div class="starter-template">
-	<button type="button" class="btn btn-primary btn-lg btn-block">Challenge me!</button>
+	<button type="button" class="btn btn-primary btn-lg btn-block" data-bind="click: newChallenge, disable: pending">Challenge me!</button>
       </div>
 
-
-      <div class="text-center">Can you crack the code?</div>
-      <h3><p class="text-center">5 + 5 = ?</p></h3>
-
-      <form class="form-inline">
-	<div class="form-group has-success has-feedback">
-	  <div class="input-group">
-	    <span class="input-group-addon">Result:</span>
-	    <label
-	    <input type="text" class="form-control">
+      <div data-bind="visible: pending">
+	<div class="text-center">Can you crack the code?</div>
+	<h3><p class="text-center">5 + 5 = ?</p></h3>
+	
+	<form class="form-inline">
+	  <div class="form-group has-success">
+	    <div class="input-group">
+	      <span class="input-group-addon">Result:</span>
+	      <input type="text" class="form-control">
+	    </div>
 	  </div>
+	</form>
+	<div class="col-md-4 text-center"> 
+	  <button data-bind="click: submitResult" class="btn btn-success">Submit result!</button> 
 	</div>
-      </form>
-
-      <div class="col-md-4 text-center"> 
-	<button class="btn btn-success">Submit result!</button> 
       </div>
     </div>
 
+    <div data-bind="visible: !pending()">
+      <h4 class="text-center">Click the button to get the next challenge!</h4>
+    </div>
+      
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/knockout-3.3.0.js"></script>
     <script src="js/bootstrap.min.js"></script>
-      </body>
+    <script src="js/aws-sdk.min.js"></script>
+    
+    <script src="js/config.js"></script>
+    <script src="js/vm.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>

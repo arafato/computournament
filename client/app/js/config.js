@@ -21,11 +21,13 @@ var Config = (function(c) {
 		error(err);
 	    } else {
 		identityId = AWS.config.credentials.identityId;
-		console.log("identityId:", config.identityId);
+		console.log("identityId:", identityId);
 
 		cb(identityId);
 	    }
 	});
     };
+
+    return c;
     
 }(Config || {}));
