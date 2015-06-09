@@ -1,6 +1,40 @@
 var AWS = require("aws-sdk");
 
+var TABLE_NAME = "Computournament-Registry";
+var ddb = new AWS.DynamoDB();
+
 exports.handler = function(event, context) {
+
+    checkPendingChallenge(context, createChallenge);
+};
+
+function checkPendingChallenge(context, cb) {
+    
+    var params = {
+    	"TableName": TABLE_NAME,
+    	"KeyConditionExpression": "CognitoId = :id",
+    	"ExpressionAttributeValues": {
+            ":id": {"S": context.identity.cognitoIdentityId }
+    	},
+	"Limit": 1,
+	"ScanIndexForward": false
+    };
+
+    ddb.query(params, function(err, data) {
+	if (err) {
+	    context.fail(err);
+	}
+
+	if (data.Items[0].Status.S == "pending") {
+	    context.succeed(data.Items[0].Challenge.S);
+	}
+	else {
+	    cb(context);
+	}
+    });
+}
+
+function createChallenge(context) {
 
     var xnum = Math.round(Math.random()*500)+1;
     var ynum = Math.round(Math.random()*500)+1;
@@ -9,7 +43,6 @@ exports.handler = function(event, context) {
 
     var timestamp = Math.round((new Date()).getTime() / 1000);
 
-    var ddb = new AWS.DynamoDB();
     var params = {
 	Item: {
 	    CognitoId : { S : context.identity.cognitoIdentityId},
@@ -19,7 +52,7 @@ exports.handler = function(event, context) {
 	    Challenge : { S : challenge }
 	},
 	
-	TableName : "Computournament-Registry"
+	TableName : TABLE_NAME
     };
     
     ddb.putItem(params, function(err, data) {
@@ -29,4 +62,4 @@ exports.handler = function(event, context) {
 	
 	context.succeed(challenge + " = ?");
     });
-};
+}
