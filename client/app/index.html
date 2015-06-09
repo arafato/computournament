@@ -18,8 +18,6 @@
   </head>
 
   <body>
-
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -29,13 +27,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Computourament</a>
+          <a class="navbar-brand" href="#">Computournament</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Your rank: <span data-bind="text: rank"</a></li>
-            <li><a href="#about">Level: <span data-bind="text: level"</a></li>
-	    <li><a href="#about">ID: <span data-bind="text: cognitoId"</a></li>
+            <li class="active"><a href="#">Your rank: <span data-bind="text: rank"></span></a></li>
+            <li><a href="#about">Level: <span data-bind="text: level"></span></a></li>
+	    <li><a href="#about">ID: <span data-bind="text: cognitoId"></span></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -44,8 +42,26 @@
     <div class="container">
       <div class="starter-template">
 	<button type="button" class="btn btn-primary btn-lg btn-block">Challenge me!</button>
+      </div>
+
+
+      <div class="text-center">Can you crack the code?</div>
+      <h3><p class="text-center">5 + 5 = ?</p></h3>
+
+      <form class="form-inline">
+	<div class="form-group has-success has-feedback">
+	  <div class="input-group">
+	    <span class="input-group-addon">Result:</span>
+	    <label
+	    <input type="text" class="form-control">
+	  </div>
 	</div>
-    </div> 
+      </form>
+
+      <div class="col-md-4 text-center"> 
+	<button class="btn btn-success">Submit result!</button> 
+      </div>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/knockout-3.3.0.js"></script>
