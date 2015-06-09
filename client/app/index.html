@@ -1,58 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
     <title>Computournament</title>
 
-    <!-- Sets initial viewport load and disables zooming  -->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-
-    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-    <!-- Include the compiled Ratchet CSS -->
-    <link href="css/ratchet.min.css" rel="stylesheet">
-    <link href="css/ratchet-theme-ios.min.css" rel="stylesheet"></link>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/start-template.css" rel="stylesheet">
     
-    <!-- Include the compiled Ratchet JS -->
-    <script src="css/ratchet.min.js"></script>
   </head>
+
   <body>
 
-    <!-- Make sure all your bars are the first things in your <body> -->
-    <header class="bar bar-nav">
-      <h1 class="title">Computournament</h1>
-    </header>
 
-    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-    <div class="content">
-      <p class="content-padded">Thanks for downloading Ratchet. This is an example HTML page that's linked up to compiled Ratchet CSS and JS, has the proper meta tags and the HTML structure. Need some more help before you start filling this with your own content? Check out some Ratchet resources:</p>
-      <div class="card">
-        <ul class="table-view">
-          <li class="table-view-cell">
-            <a class="push-right" href="http://goratchet.com">
-              <strong>Ratchet documentation</strong>
-            </a>
-          </li>
-          <li class="table-view-cell">
-            <a class="push-right" href="https://github.com/twbs/ratchet/">
-              <strong>Ratchet on Github</strong>
-            </a>
-          </li>
-          <li class="table-view-cell">
-            <a class="push-right" href="https://groups.google.com/forum/#!forum/goratchet">
-              <strong>Ratchet Google group</strong>
-            </a>
-          </li>
-          <li class="table-view-cell">
-            <a class="push-right" href="https://twitter.com/goratchet">
-              <strong>Ratchet on Twitter</strong>
-            </a>
-          </li>
-        </ul>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Computourament</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Your rank: <span data-bind="text: rank"</a></li>
+            <li><a href="#about">Level: <span data-bind="text: level"</a></li>
+	    <li><a href="#about">ID: <span data-bind="text: cognitoId"</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
-    </div>
+    </nav>
+    
+    <div class="container">
+      <div class="starter-template">
+	<button type="button" class="btn btn-primary btn-lg btn-block">Challenge me!</button>
+	</div>
+    </div> 
 
-  </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/knockout-3.3.0.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+      </body>
 </html>
