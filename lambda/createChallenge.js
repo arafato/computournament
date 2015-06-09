@@ -5,7 +5,7 @@ exports.handler = function(event, context) {
     var xnum = Math.round(Math.random()*500)+1;
     var ynum = Math.round(Math.random()*500)+1;
     var op = (xnum % 2 === 0) ? " + " : " - "; 
-    var ex = xnum + op + ynum + ' = ?';
+    var challenge = xnum + op + ynum;
 
     var timestamp = Math.round((new Date()).getTime() / 1000);
 
@@ -15,7 +15,8 @@ exports.handler = function(event, context) {
 	    CognitoId : { S : context.identity.cognitoIdentityId},
 	    ChallengeId : { N : timestamp.toString() },
 	    Status : { S : "pending" },
-	    Starttime : { N : timestamp.toString() }
+	    Starttime : { N : timestamp.toString() },
+	    Challenge : { S : challenge }
 	},
 	
 	TableName : "Computournament-Registry"
@@ -26,6 +27,6 @@ exports.handler = function(event, context) {
 	    context.fail(err);
 	}
 	
-	context.succeed(ex);
+	context.succeed(challenge + " = ?");
     });
 };
