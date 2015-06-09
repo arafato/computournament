@@ -11,7 +11,7 @@ var vm = function(vm) {
     this.errormsg = ko.observable("");
     this.pending = ko.observable(false);
 
-    this.challenge = ko.observable("");
+    this.challenge = ko.observable("Fetching challenge...");
     
     this.lambda = new AWS.Lambda();
     
@@ -28,7 +28,6 @@ vm.prototype.generateChallenge = function() {
     var that = this;
     
     this.pending(true);
-    console.log("new challenge");
 
     var params = {
 	FunctionName: "generateChallenge",
@@ -39,6 +38,7 @@ vm.prototype.generateChallenge = function() {
 	    console.log(err, err.stack);
 	    that.error(true);
 	    that.errormsg(err);
+	    that.pending(false);
 	} else {
 	    that.challenge(data.Payload);
 	}
@@ -49,4 +49,5 @@ vm.prototype.submitResult = function() {
 
     console.log("submitting challenge...");
     this.pending(false);
+    this.challenge("Fetching challenge...");
 };
