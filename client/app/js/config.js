@@ -9,6 +9,8 @@ var Config = (function(c) {
 
     var identityId = null;
 
+    c.LEADERSHIP_TABLE = "Computournament-LeadershipBoard";
+    
     c.generateChallengeLambdaParams = {
 	FunctionName: "generateChallenge",
 	InvocationType: "RequestResponse"
@@ -21,23 +23,24 @@ var Config = (function(c) {
     
     c.getIdentityId = function(cb, error) {
 
-	if (identityId === null) {
+	if (identityId !== null) {
 	    cb(identityId);
 	}
-
-	AWS.config.credentials.get(function(err) {
-	    if (err) {
-		console.log(err, err.stack);
-		error(err);
-	    } else {
-		identityId = AWS.config.credentials.identityId;
-		console.log("identityId:", identityId);
-
-		cb(identityId);
-	    }
-	});
+	else {
+	    AWS.config.credentials.get(function(err) {
+		if (err) {
+		    console.log(err, err.stack);
+		    error(err);
+		} else {
+		    identityId = AWS.config.credentials.identityId;
+		    console.log("identityId:", identityId);
+		    
+		    cb(identityId);
+		}
+	    });
+	}
     };
-
+    
     return c;
     
 }(Config || {}));

@@ -3,7 +3,7 @@
 var vm = function(vm) {
 
     var that = this;
-    
+
     this.identityId = ko.observable();
     this.rank = ko.observable();
     this.level = ko.observable();
@@ -70,6 +70,7 @@ vm.prototype.submitChallenge = function() {
 	    that.errormsg(err);
 	} else {
 	    var res = JSON.parse(data.Payload);
+	    console.log(res);
 	    that.timeToSolve(res.timeToSolve);
 	    that.resultStatus(res.result === "solved");
 	    that.showStatistics(true);

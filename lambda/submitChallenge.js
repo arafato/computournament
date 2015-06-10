@@ -1,6 +1,7 @@
 var AWS = require("aws-sdk");
 
-var TABLE_NAME = "Computournament-Registry";
+var TABLE_NAME_REGISTRY = "Computournament-Registry";
+var TABLE_NAME_LEADERSHIPBOARD = "Computournament-LeadershipBoard";
 var ddb = new AWS.DynamoDB();
 
 exports.handler = function(event, context) {
@@ -14,7 +15,7 @@ exports.handler = function(event, context) {
 	
 	var params = {
 	    Item: item,
-	    TableName : TABLE_NAME
+	    TableName : TABLE_NAME_REGISTRY
 	};
 
 	ddb.putItem(params, function(err, data) {
@@ -23,7 +24,28 @@ exports.handler = function(event, context) {
 	    }
 
 	    var timeToSolve = timestamp - item.Starttime.N;
-	    context.succeed( { timeToSolve: timeToSolve, result: item.Status.S  }  );
+
+	    var score = (item.Status.S === "solved") ? (20 - timeToSolve).toString() : (-10).toString();
+	    
+	    var params2 = {
+		TableName: TABLE_NAME_LEADERSHIPBOARD,
+		Key: {
+		    CognitoId: {
+			S: context.identity.cognitoIdentityId
+		    }
+		},
+		UpdateExpression: 'SET Score = Score + :p',
+		ExpressionAttributeValues: {
+		    ':p': { N: score }
+		}
+	    };
+
+	    ddb.updateItem(params2, function(err, data) {
+		if (err) {
+		    context.fail(err);
+		}
+		context.succeed( { timeToSolve: timeToSolve, result: item.Status.S  }  );	
+	    });
 	});
     });
 };
@@ -31,7 +53,7 @@ exports.handler = function(event, context) {
 function checkPendingChallenge(context, cb) {
     
     var params = {
-    	"TableName": TABLE_NAME,
+    	"TableName": TABLE_NAME_REGISTRY,
     	"KeyConditionExpression": "CognitoId = :id",
     	"ExpressionAttributeValues": {
             ":id": {"S": context.identity.cognitoIdentityId }
@@ -53,4 +75,3 @@ function checkPendingChallenge(context, cb) {
 	}
     });
 }
-
