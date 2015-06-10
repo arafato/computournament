@@ -17,6 +17,7 @@ var vm = function(vm) {
     this.resultStatus = ko.observable(false);
     // The proposed solution of the user
     this.solution = ko.observable();
+    this.waitingForStatistics = ko.observable(false);
     
     this.challenge = ko.observable("Fetching challenge...");
     
@@ -35,6 +36,7 @@ vm.prototype.generateChallenge = function() {
     var that = this;
     
     this.pending(true);
+    this.showStatistics(false);
 
     this.lambda.invoke(Config.generateChallengeLambdaParams, function(err, data) {
 	if (err) {
@@ -53,6 +55,7 @@ vm.prototype.submitChallenge = function() {
     var that = this;
 
     this.pending(false);
+    this.waitingForStatistics(true);
     this.challenge("Fetching challenge...");
 
     var params = Object.create(Config.submitChallengeLambdaParams);
@@ -70,6 +73,7 @@ vm.prototype.submitChallenge = function() {
 	    that.timeToSolve(res.timeToSolve);
 	    that.resultStatus(res.result === "solved");
 	    that.showStatistics(true);
+	    that.waitingForStatistics(false);
 	}
     });
 };

@@ -62,13 +62,17 @@
       </div>
     </div>
 
-    <div data-bind="visible: !pending()">
+    <div data-bind="visible: !waitingForStatistics() && !pending()">
       <h4 class="text-center">Click the button to get the next challenge!</h4>
     </div>
 
+    <div data-bind="visible: waitingForStatistics">
+      <h4 class="text-center">Analyzing your solution...</h4>
+    </div>
+
     <div data-bind="visible: showStatistics">
-      <p>Time to solve: <span data-bind="text: timeToSolve"></span></p>
-      <p>Answer was <span data-bind="text: resultStatus"></span></p>
+      <p class="text-center">Time to solve: <span data-bind="text: timeToSolve"></span></p>
+      <p class="text-center">Answer was <span data-bind="text: resultStatus"></span></p>
     </div>
 
     <div data-bind="visible: error">
