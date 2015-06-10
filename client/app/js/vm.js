@@ -56,18 +56,20 @@ vm.prototype.submitChallenge = function() {
     this.challenge("Fetching challenge...");
 
     var params = Object.create(Config.submitChallengeLambdaParams);
-    params.Payload = {
+    params.Payload = JSON.stringify({
 	solution: this.solution()
-    };
+    });
     
-    this.lambda.invoke(Config.submitChallengeLambdaParams, function(err, data) {
+    this.lambda.invoke(params, function(err, data) {
 	if (err) {
 	    console.log(err, err.stack);
 	    that.error(true);
 	    that.errormsg(err);
 	} else {
-	    // TODO: show statistic (time to solve, right/wrong)
-	    console.log(data);
+	    var res = JSON.parse(data.Payload);
+	    that.timeToSolve(res.timeToSolve);
+	    that.resultStatus(res.result === "solved");
+	    that.showStatistics(true);
 	}
     });
 };
