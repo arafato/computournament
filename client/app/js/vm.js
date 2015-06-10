@@ -6,7 +6,7 @@ var vm = function(vm) {
 
     this.identityId = ko.observable();
     this.rank = ko.observable();
-    this.level = ko.observable();
+    this.score = ko.observable();
     this.error = ko.observable(false);
     this.errormsg = ko.observable("");
     this.pending = ko.observable(false);

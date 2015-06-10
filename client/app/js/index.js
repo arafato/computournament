@@ -6,9 +6,9 @@ $(function() {
     var model = new vm();
     ko.applyBindings(model);
 
-    // Adding new user to Leadershipboard
     Config.getIdentityId(function(id) {
-    
+
+	// Adding new user to Leadershipboard
 	var params = {
 	    Item: {
 		CognitoId: {
@@ -27,20 +27,31 @@ $(function() {
 		model.errormsg(err);
 	    }
 	});
-    });
-    
-    (function poll(){
-	setTimeout(function() {
 
-	    lambda.invoke(params, function(err, data) {
-		if (err) {
-		    
-		} else {
-		     
+	(function poll(){
+	    setTimeout(function() {
+		
+		var params = {
+		    Key: {
+			CognitoId: {
+			    S: id
+			}
+		    },
+		    TableName: Config.LEADERSHIP_TABLE
+		};
+		
+		ddb.getItem(params, function(err, data) {
+		    if (err) {
+			model.error(true);
+			model.errormsg(err);
+			return;
+		    }
+
+		    model.score(data.Item.Score.N);
 		    poll();
-		}
-	    });
-	    
-	}, 30000);
-    })();
+		});
+		
+	    }, Config.POLLING_INTERVAL);
+	})();
+    });
 });

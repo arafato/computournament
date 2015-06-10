@@ -10,6 +10,8 @@ var Config = (function(c) {
     var identityId = null;
 
     c.LEADERSHIP_TABLE = "Computournament-LeadershipBoard";
+
+    c.POLLING_INTERVAL = 5000;
     
     c.generateChallengeLambdaParams = {
 	FunctionName: "generateChallenge",
