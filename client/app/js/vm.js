@@ -10,6 +10,11 @@ var vm = function(vm) {
     this.error = ko.observable(false);
     this.errormsg = ko.observable("");
     this.pending = ko.observable(false);
+    this.showStatistics = ko.observable(false);
+    // Time it took to solve the last challenge
+    this.timeToSolve = ko.observable();
+    // Was the result right or wrong?
+    this.result = ko.observable(false);
 
     this.challenge = ko.observable("Fetching challenge...");
     
@@ -29,11 +34,7 @@ vm.prototype.generateChallenge = function() {
     
     this.pending(true);
 
-    var params = {
-	FunctionName: "generateChallenge",
-	InvocationType: "RequestResponse"
-    };
-    this.lambda.invoke(params, function(err, data) {
+    this.lambda.invoke(Config.generateChallengeLambdaParams, function(err, data) {
 	if (err) {
 	    console.log(err, err.stack);
 	    that.error(true);
@@ -45,9 +46,20 @@ vm.prototype.generateChallenge = function() {
     });
 };
 
-vm.prototype.submitResult = function() {
+vm.prototype.submitChallenge = function() {
 
-    console.log("submitting challenge...");
+    var that = this;
+
     this.pending(false);
     this.challenge("Fetching challenge...");
+    
+    this.lamda.invoke(Config.submitChallengeLambdaParams, function(err, data) {
+	if (err) {
+	    console.log(err, err.stack);
+	    that.error(true);
+	    that.errormsg(err);
+	} else {
+	    // TODO: show statistic (time to solve, right/wrong)
+	}
+    });
 };

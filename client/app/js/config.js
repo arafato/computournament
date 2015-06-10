@@ -9,6 +9,16 @@ var Config = (function(c) {
 
     var identityId = null;
 
+    c.generateChallengeLambdaParams = {
+	FunctionName: "generateChallenge",
+	InvocationType: "RequestResponse"
+    };
+
+    c.submitChallengeLambdaParams = {
+	FunctionName: "submitChallenge",
+	InvocationType: "RequestResponse"
+    };
+    
     c.getIdentityId = function(cb, error) {
 
 	if (identityId === null) {

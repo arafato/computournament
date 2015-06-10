@@ -57,13 +57,18 @@
 	  </div>
 	</form>
 	<div class="col-md-4 text-center"> 
-	  <button data-bind="click: submitResult" class="btn btn-success">Submit result!</button> 
+	  <button data-bind="click: submitChallenge" class="btn btn-success">Submit result!</button> 
 	</div>
       </div>
     </div>
 
     <div data-bind="visible: !pending()">
       <h4 class="text-center">Click the button to get the next challenge!</h4>
+    </div>
+
+    <div data-bind="visible: showStatistics">
+      <p>Time to solve: <span data-bind="text: timeToSolve"></span></p>
+      <p>Answer was <span data-bind="text: result"></span></p>
     </div>
 
     <div data-bind="visible: error">
