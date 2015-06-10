@@ -60,7 +60,7 @@ vm.prototype.submitChallenge = function() {
 	solution: this.solution()
     };
     
-    this.lamda.invoke(Config.submitChallengeLambdaParams, function(err, data) {
+    this.lambda.invoke(Config.submitChallengeLambdaParams, function(err, data) {
 	if (err) {
 	    console.log(err, err.stack);
 	    that.error(true);

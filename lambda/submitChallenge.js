@@ -46,7 +46,7 @@ function checkPendingChallenge(context, cb) {
 	}
 
 	if (data.Items[0].Status.S == "pending") {
-	    cb(data.Item[0]);
+	    cb(data.Items[0]);
 	}
 	else {
 	    context.fail("No pending challenge available!");
