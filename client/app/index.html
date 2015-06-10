@@ -70,7 +70,7 @@
     </div>
 
     <div data-bind="visible: showStatistics">
-      <p class="text-center">Time to solve: <span data-bind="text: timeToSolve"></span></p>
+      <p class="text-center">Your brain ran at full capacity for <span data-bind="text: timeToSolve"></span> secs.</p>
       <p class="text-center bg-danger" data-bind="visible: !resultStatus()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Ouch, that was wrong!</p>
       <p class="text-center bg-success" data-bind="visible: resultStatus"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Awesome job! Answer was correct!</p>
     </div>
