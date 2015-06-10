@@ -25,7 +25,7 @@ exports.handler = function(event, context) {
 
 	    var timeToSolve = timestamp - item.Starttime.N;
 
-	    var score = (item.Status.S === "solved") ? (20 - timeToSolve).toString() : (-10).toString();
+	    var points = (item.Status.S === "solved") ? (20 - timeToSolve).toString() : (-10).toString();
 	    
 	    var params2 = {
 		TableName: TABLE_NAME_LEADERSHIPBOARD,
@@ -36,7 +36,7 @@ exports.handler = function(event, context) {
 		},
 		UpdateExpression: 'SET Score = Score + :p',
 		ExpressionAttributeValues: {
-		    ':p': { N: score }
+		    ':p': { N: points }
 		}
 	    };
 
@@ -44,7 +44,7 @@ exports.handler = function(event, context) {
 		if (err) {
 		    context.fail(err);
 		}
-		context.succeed( { timeToSolve: timeToSolve, result: item.Status.S  }  );	
+		context.succeed( { timeToSolve: timeToSolve, result: item.Status.S, points: points } );	
 	    });
 	});
     });

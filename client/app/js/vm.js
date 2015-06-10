@@ -6,7 +6,10 @@ var vm = function(vm) {
 
     this.identityId = ko.observable();
     this.rank = ko.observable();
+    // The total score
     this.score = ko.observable();
+    // The points received of the current challenge
+    this.challengePoints = ko.observable();
     this.error = ko.observable(false);
     this.errormsg = ko.observable("");
     this.pending = ko.observable(false);
@@ -73,6 +76,7 @@ vm.prototype.submitChallenge = function() {
 	    console.log(res);
 	    that.timeToSolve(res.timeToSolve);
 	    that.resultStatus(res.result === "solved");
+	    that.challengePoints(res.points);
 	    that.showStatistics(true);
 	    that.waitingForStatistics(false);
 	}
