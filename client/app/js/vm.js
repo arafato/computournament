@@ -67,6 +67,7 @@ vm.prototype.submitChallenge = function() {
 	    that.errormsg(err);
 	} else {
 	    // TODO: show statistic (time to solve, right/wrong)
+	    console.log(data);
 	}
     });
 };
