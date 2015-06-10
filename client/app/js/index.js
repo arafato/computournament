@@ -64,25 +64,3 @@ $(function() {
 	});
     }
 });
-
-
-
-// var params = {
-// 	    Key: {
-// 		CognitoId: {
-// 		    S: id
-// 		}
-// 	    },
-// 	    TableName: Config.LEADERSHIP_TABLE
-// 	};
-	
-// 	ddb.getItem(params, function(err, data) {
-// 	    if (err) {
-// 		model.error(true);
-// 		model.errormsg(err);
-// 		return;
-// 	    }
-	    
-// 	    model.score(data.Item.Score.N);
-// 	    cb();
-// 	});
