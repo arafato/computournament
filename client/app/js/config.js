@@ -33,8 +33,6 @@ var Config = (function(c) {
 		    error(err);
 		} else {
 		    identityId = AWS.config.credentials.identityId;
-		    console.log("identityId:", identityId);
-		    
 		    cb(identityId);
 		}
 	    });
