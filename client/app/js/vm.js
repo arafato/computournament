@@ -75,5 +75,7 @@ vm.prototype.submitChallenge = function() {
 	    that.showStatistics(true);
 	    that.waitingForStatistics(false);
 	}
+
+	that.solution("");
     });
 };
