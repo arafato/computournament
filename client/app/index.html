@@ -48,17 +48,17 @@
 	<div class="text-center">Can you crack the code?</div>
 	<h3><p data-bind="text: challenge" class="text-center"></p></h3>
 	
-	<form class="form-inline">
+	<form data-bind="submit: submitChallenge" class="form-inline">
 	  <div class="form-group has-success">
 	    <div class="input-group">
 	      <span class="input-group-addon">Result:</span>
-	      <input type="text" class="form-control">
+	      <input data-bind="value: solution" type="text" class="form-control">
 	    </div>
 	  </div>
+	  <div class="col-md-4 text-center"> 
+	    <button type="submit" class="btn btn-success">Submit result!</button> 
+	  </div>
 	</form>
-	<div class="col-md-4 text-center"> 
-	  <button data-bind="click: submitChallenge" class="btn btn-success">Submit result!</button> 
-	</div>
       </div>
     </div>
 
@@ -68,7 +68,7 @@
 
     <div data-bind="visible: showStatistics">
       <p>Time to solve: <span data-bind="text: timeToSolve"></span></p>
-      <p>Answer was <span data-bind="text: result"></span></p>
+      <p>Answer was <span data-bind="text: resultStatus"></span></p>
     </div>
 
     <div data-bind="visible: error">

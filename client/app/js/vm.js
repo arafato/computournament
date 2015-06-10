@@ -14,8 +14,10 @@ var vm = function(vm) {
     // Time it took to solve the last challenge
     this.timeToSolve = ko.observable();
     // Was the result right or wrong?
-    this.result = ko.observable(false);
-
+    this.resultStatus = ko.observable(false);
+    // The proposed solution of the user
+    this.solution = ko.observable();
+    
     this.challenge = ko.observable("Fetching challenge...");
     
     this.lambda = new AWS.Lambda();
@@ -52,6 +54,11 @@ vm.prototype.submitChallenge = function() {
 
     this.pending(false);
     this.challenge("Fetching challenge...");
+
+    var params = Object.create(Config.submitChallengeLambdaParams);
+    params.Payload = {
+	solution: this.solution()
+    };
     
     this.lamda.invoke(Config.submitChallengeLambdaParams, function(err, data) {
 	if (err) {
