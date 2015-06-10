@@ -25,7 +25,7 @@ function checkPendingChallenge(context, cb) {
 	    context.fail(err);
 	}
 
-	if (data.Items[0].Status.S == "pending") {
+	if (data.Items[0] !== undefined && data.Items[0].Status.S == "pending") {
 	    context.succeed(data.Items[0].Challenge.S);
 	}
 	else {
