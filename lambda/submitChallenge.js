@@ -10,7 +10,7 @@ exports.handler = function(event, context) {
     checkPendingChallenge(context, function(item) {
 
 	item.Status.S = (event.solution === eval(item.Challenge.S)) ? "solved" : "failed";
-	item.Enddtime.N = timestamp.toString();
+	item.Enddtime = { N: timestamp.toString() }; 
 	
 	var params = {
 	    Item: item,
