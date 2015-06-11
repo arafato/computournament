@@ -32,8 +32,13 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Rank: <span data-bind="text: rank"></span></a></li>
 	    <li class="active"><a href="#">Score: <span data-bind="text: score"></span></a></li>
-	    <li><a href="#">ID: <span data-bind="text: identityId"></span></a></li>
+	    <li class="active"><a href="#">IdentityId: <span data-bind="text: identityId"></span></a></li>
           </ul>
+	  <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input data-bind="textInput: nickname" type="text" class="form-control" placeholder="Your Nickname">
+            </div>
+	  </form>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

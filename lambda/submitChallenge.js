@@ -34,9 +34,10 @@ exports.handler = function(event, context) {
 			S: context.identity.cognitoIdentityId
 		    }
 		},
-		UpdateExpression: 'SET Score = Score + :p',
+		UpdateExpression: 'SET Score = Score + :p, Nickname = :n',
 		ExpressionAttributeValues: {
-		    ':p': { N: points }
+		    ':p': { N: points },
+		    ':n': { S: event.nickname }
 		}
 	    };
 

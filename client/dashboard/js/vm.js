@@ -10,7 +10,8 @@ function vm() {
     });
 };
 
-function player(id, score) {
-	this.id = ko.observable(id);
-	this.score = ko.observable(score);
+function player(id, score, nickname) {
+    this.id = ko.observable(id);
+    this.score = ko.observable(score);
+    this.nickname = ko.observable(nickname);
 };

@@ -5,6 +5,7 @@ var vm = function(vm) {
     var that = this;
 
     this.identityId = ko.observable();
+    this.nickname = ko.observable();
     this.rank = ko.observable();
     // The total score
     this.score = ko.observable();
@@ -63,7 +64,8 @@ vm.prototype.submitChallenge = function() {
 
     var params = Object.create(Config.submitChallengeLambdaParams);
     params.Payload = JSON.stringify({
-	solution: this.solution()
+	solution: this.solution(),
+	nickname: this.nickname() || "-"
     });
     
     this.lambda.invoke(params, function(err, data) {
@@ -73,7 +75,6 @@ vm.prototype.submitChallenge = function() {
 	    that.errormsg(err);
 	} else {
 	    var res = JSON.parse(data.Payload);
-	    console.log(res);
 	    that.timeToSolve(res.timeToSolve);
 	    that.resultStatus(res.result === "solved");
 	    that.challengePoints(res.points);

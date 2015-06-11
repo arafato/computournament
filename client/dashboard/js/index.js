@@ -27,8 +27,7 @@ $(function() {
 	    }
 
 	    model.players(ko.utils.arrayMap(data.Items, function(p) {
-
-		return new player(p.CognitoId.S, p.Score.N);
+		return new player(p.CognitoId.S, p.Score.N, p.Nickname.S);
 	    }));
 
  	    model.players.sort(function(a, b) {
