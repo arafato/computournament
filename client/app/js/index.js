@@ -16,6 +16,9 @@ $(function() {
 		},
 		Score: {
 		    N: "0"
+		},
+		Nickname: {
+		    S: "-"
 		}
 	    },
 	    TableName : Config.LEADERSHIP_TABLE
