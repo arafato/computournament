@@ -17,7 +17,8 @@ function checkPendingChallenge(context, cb) {
             ":id": {"S": context.identity.cognitoIdentityId }
     	},
 	"Limit": 1,
-	"ScanIndexForward": false
+	"ScanIndexForward": false,
+	"ConsistentRead": true
     };
 
     ddb.query(params, function(err, data) {
