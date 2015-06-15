@@ -69,7 +69,7 @@ function checkPendingChallenge(context, cb) {
 	    context.fail(err);
 	}
 
-	if (data.Items[0].Status.S == "pending") {
+	if (data.Items[0] !== undefined && data.Items[0].Status.S == "pending") {
 	    cb(data.Items[0]);
 	}
 	else {

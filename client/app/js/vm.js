@@ -75,6 +75,12 @@ vm.prototype.submitChallenge = function() {
 	    that.errormsg(err);
 	} else {
 	    var res = JSON.parse(data.Payload);
+	    if (res.errorMessage) {
+		that.error(true);
+		that.errormsg(res.errorMessage);
+		return;
+	    }
+	    
 	    that.timeToSolve(res.timeToSolve);
 	    that.resultStatus(res.result === "solved");
 	    that.challengePoints(res.points);
