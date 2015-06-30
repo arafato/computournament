@@ -31,7 +31,7 @@ var vm = function(vm) {
 	that.identityId(id);
     }, function(err) {
 	console.log(err);
-	this.authError(true);
+	that.authError(true);
     });
 };
 
